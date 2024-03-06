@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.mvc.menudb.model.dao.MenudbMapper">
+
+    <select id="selectOneMenuById" resultType="com.ohgiraffers.mvc.menudb.model.dto.menuDTO">
+        SELECT
+            menu_name,
+            menu_price,
+            category_code,
+            orderable_status
+        FROM
+            tbl_menu
+        WHERE
+            menu_code = #{ menuCode }
+    </select>
+
+    <select id="selectAllMenu" resultType="com.ohgiraffers.mvc.menudb.model.dto.menuDTO">
+        SELECT
+        menu_code,
+            menu_name,
+            menu_price,
+            category_code,
+            orderable_status
+        FROM
+            tbl_menu
+        WHERE
+            orderable_status = 'Y'
+    </select>
+
+    <insert id="insertMenu">
+        INSERT
+        INTO tbl_menu
+        (
+        menu_name,
+        menu_price,
+        orderable_status,
+        category_code
+
+        )
+        VALUES
+        (
+            #{ menuName },
+            #{ menuPrice },
+            #{ orderableStatus },
+        #{ categoryCode }
+        )
+    </insert>
+<update id="updateMenu">
+    UPDATE
+        tbl_menu
+    SET
+        menu_name = #{ menuName}
+    WHERE
+        menu_code = #{ menuCode}
+</update>
+
+    <delete id="deleteMenu">
+        DELETE
+        FROM
+        tbl_menu
+        WHERE
+        menu_code = #{ menuCode }
+    </delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
